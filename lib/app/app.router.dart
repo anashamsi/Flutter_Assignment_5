@@ -8,29 +8,29 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i3;
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment_5/app/UI/Splash%20Screen/splash_view.dart'
+import 'package:flutter_assignment_5/app/UI/Login%20Screen/login_view.dart'
     as _i2;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i4;
 
 class Routes {
-  static const splashView = '/';
+  static const loginView = '/';
 
-  static const all = <String>{splashView};
+  static const all = <String>{loginView};
 }
 
 class StackedRouter extends _i1.RouterBase {
   final _routes = <_i1.RouteDef>[
-    _i1.RouteDef(Routes.splashView, page: _i2.SplashView),
+    _i1.RouteDef(Routes.loginView, page: _i2.LoginView),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
-    _i2.SplashView: (data) {
-      final args = data.getArgs<SplashViewArguments>(
-        orElse: () => const SplashViewArguments(),
+    _i2.LoginView: (data) {
+      final args = data.getArgs<LoginViewArguments>(
+        orElse: () => const LoginViewArguments(),
       );
       return _i3.MaterialPageRoute<dynamic>(
-        builder: (context) => _i2.SplashView(key: args.key),
+        builder: (context) => _i2.LoginView(key: args.key),
         settings: data,
       );
     },
@@ -43,8 +43,8 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-class SplashViewArguments {
-  const SplashViewArguments({this.key});
+class LoginViewArguments {
+  const LoginViewArguments({this.key});
 
   final _i3.Key? key;
 
@@ -54,7 +54,7 @@ class SplashViewArguments {
   }
 
   @override
-  bool operator ==(covariant SplashViewArguments other) {
+  bool operator ==(covariant LoginViewArguments other) {
     if (identical(this, other)) return true;
     return other.key == key;
   }
@@ -66,7 +66,7 @@ class SplashViewArguments {
 }
 
 extension NavigatorStateExtension on _i4.NavigationService {
-  Future<dynamic> navigateToSplashView({
+  Future<dynamic> navigateToLoginView({
     _i3.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -75,8 +75,8 @@ extension NavigatorStateExtension on _i4.NavigationService {
     transition,
   }) async {
     return navigateTo<dynamic>(
-      Routes.splashView,
-      arguments: SplashViewArguments(key: key),
+      Routes.loginView,
+      arguments: LoginViewArguments(key: key),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
@@ -84,7 +84,7 @@ extension NavigatorStateExtension on _i4.NavigationService {
     );
   }
 
-  Future<dynamic> replaceWithSplashView({
+  Future<dynamic> replaceWithLoginView({
     _i3.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -93,8 +93,8 @@ extension NavigatorStateExtension on _i4.NavigationService {
     transition,
   }) async {
     return replaceWith<dynamic>(
-      Routes.splashView,
-      arguments: SplashViewArguments(key: key),
+      Routes.loginView,
+      arguments: LoginViewArguments(key: key),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
