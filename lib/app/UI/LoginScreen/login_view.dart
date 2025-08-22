@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment_5/app/UI/Login%20Screen/login_viewmodel.dart'
+import 'package:flutter_assignment_5/app/UI/LoginScreen/login_viewmodel.dart'
     as model;
 
 import 'package:stacked/stacked.dart';
@@ -204,68 +204,74 @@ Widget loginwithsocialmedia() {
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
     children: [
-      InkWell(
-        onTap: () {},
-        child: Container(
-          height: 50,
-          width: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.transparent,
-            border: Border.all(
-              color: const Color.fromARGB(91, 158, 158, 158),
-              width: 1,
+      Flexible(
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            height: 50,
+            width: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.transparent,
+              border: Border.all(
+                color: const Color.fromARGB(91, 158, 158, 158),
+                width: 1,
+              ),
             ),
-          ),
-          child: Center(
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('assets/images/logo.png'),
-              radius: 15,
-            ),
-          ),
-        ),
-      ),
-      InkWell(
-        onTap: () {},
-        child: Container(
-          height: 50,
-          width: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.transparent,
-            border: Border.all(
-              color: const Color.fromARGB(91, 158, 158, 158),
-              width: 1,
-            ),
-          ),
-          child: Center(
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('assets/images/logo.png'),
-              radius: 15,
+            child: Center(
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: AssetImage('assets/images/FacebookLogo.jpeg'),
+                radius: 13,
+              ),
             ),
           ),
         ),
       ),
-      InkWell(
-        onTap: () {},
-        child: Container(
-          height: 50,
-          width: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.transparent,
-            border: Border.all(
-              color: const Color.fromARGB(91, 158, 158, 158),
-              width: 1,
+      Flexible(
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            height: 50,
+            width: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.transparent,
+              border: Border.all(
+                color: const Color.fromARGB(91, 158, 158, 158),
+                width: 1,
+              ),
+            ),
+            child: Center(
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: AssetImage('assets/images/GoogleLogo.jpg'),
+                radius: 13,
+              ),
             ),
           ),
-          child: Center(
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('assets/images/logo.png'),
-              radius: 15,
+        ),
+      ),
+      Flexible(
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            height: 50,
+            width: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.transparent,
+              border: Border.all(
+                color: const Color.fromARGB(91, 158, 158, 158),
+                width: 1,
+              ),
+            ),
+            child: Center(
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: AssetImage('assets/images/AppleLogo.png'),
+                radius: 13,
+              ),
             ),
           ),
         ),
