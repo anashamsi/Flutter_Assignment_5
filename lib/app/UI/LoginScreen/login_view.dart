@@ -27,141 +27,159 @@ class LoginView extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.white,
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 50,
-                    child: Image.asset('assets/images/logo.png'),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
                   ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Login to Your Account',
-                  style: TextStyle(
-                    color: Color(0xff0F2F44),
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                _CurptinoTextField(
-                  cntroller: _emailController,
-                  placeholder: 'Enter email',
-                  prefixicon: Icons.email,
-                ),
-                SizedBox(height: 10),
-                _CurptinoTextField(
-                  cntroller: _passwordController,
-                  placeholder: 'Enter password',
-                  prefixicon: Icons.lock,
-                  suffixicon: Icons.remove_red_eye,
-                ),
-                SizedBox(height: 5),
-                rememberme_checkbox(model.ischeck, (newValue) {
-                  model.checkbox(newValue);
-                }),
-                SizedBox(height: 5),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _bluecolor,
-                    minimumSize: Size(double.infinity, 55),
-                    elevation: 6,
-                  ),
-
-                  onPressed: () async {
-                    try {
-                      final credential = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                            email: _emailController.text.trim(),
-                            password: _passwordController.text.trim(),
-                          );
-
-                      model.navigateToMainView();
-                    } on FirebaseAuthException catch (e) {
-                      var snackBar = SnackBar(content: Text("${e.code}"));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    } catch (e, s) {
-                      var snackBar = SnackBar(
-                        content: Text("Unknown error: $e"),
-                      );
-                    }
-                  },
-                  child: Text(
-                    'Sign in',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15),
-                // forget password text
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'Forget the password?',
-                    style: TextStyle(
-                      color: _bluecolor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                // or continue line
-                Row(
-                  children: [
-                    Expanded(child: Divider(thickness: 1, color: Colors.grey)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        "or continue with",
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w500,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                          child: Image.asset('assets/images/logo.png'),
                         ),
                       ),
-                    ),
-                    Expanded(child: Divider(thickness: 1, color: Colors.grey)),
-                  ],
-                ),
-                SizedBox(height: 20),
-                // facebook, google and apple button
-                loginwithsocialmedia(),
-                SizedBox(height: 15),
-                // don't have an account
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "Sign up",
+                      SizedBox(height: 20),
+                      Text(
+                        'Login to Your Account',
                         style: TextStyle(
-                          color: _bluecolor,
+                          color: Color(0xff0F2F44),
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          fontSize: 13,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      _CurptinoTextField(
+                        cntroller: _emailController,
+                        placeholder: 'Enter email',
+                        prefixicon: Icons.email,
+                      ),
+                      SizedBox(height: 10),
+                      _CurptinoTextField(
+                        cntroller: _passwordController,
+                        placeholder: 'Enter password',
+                        obsecureText: true,
+
+                        prefixicon: Icons.lock,
+                        suffixicon: Icons.remove_red_eye,
+                      ),
+                      SizedBox(height: 5),
+                      rememberme_checkbox(model.ischeck, (newValue) {
+                        model.checkbox(newValue);
+                      }),
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _bluecolor,
+                          minimumSize: Size(double.infinity, 55),
+                          elevation: 6,
+                        ),
+
+                        onPressed: () async {
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                );
+
+                            model.navigateToMainView();
+                          } on FirebaseAuthException catch (e) {
+                            var snackBar = SnackBar(content: Text("${e.code}"));
+                            ScaffoldMessenger.of(
+                              context,
+                            ).showSnackBar(snackBar);
+                          } catch (e, s) {
+                            var snackBar = SnackBar(
+                              content: Text("Unknown error: $e"),
+                            );
+                          }
+                        },
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      // forget password text
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'Forget the password?',
+                          style: TextStyle(
+                            color: _bluecolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      // or continue line
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(thickness: 1, color: Colors.grey),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              "or continue with",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(thickness: 1, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      // facebook, google and apple button
+                      loginwithsocialmedia(),
+                      SizedBox(height: 15),
+                      // don't have an account
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "Sign up",
+                              style: TextStyle(
+                                color: _bluecolor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           ),
         );
@@ -174,12 +192,13 @@ Widget _CurptinoTextField({
   required String placeholder,
   required IconData prefixicon,
   required TextEditingController cntroller,
+  bool obsecureText = false,
   IconData? suffixicon,
 }) {
   return CupertinoTextField(
     padding: EdgeInsets.all(17),
     controller: cntroller,
-
+    obscureText: obsecureText,
     placeholder: placeholder,
     placeholderStyle: TextStyle(
       color: CupertinoColors.systemGrey,
