@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment_5/app/UI/ProductView/product_viewmodel.dart';
+import 'package:flutter_assignment_5/app/UI/WishlistScreen/Wishlist_viewmodel.dart';
 import 'package:readmore/readmore.dart';
 import 'package:stacked/stacked.dart';
 
@@ -24,9 +25,9 @@ class ProductView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    topHeadingRow(),
+                    topHeadingRow(ProductViewmodel()),
                     SizedBox(height: 15),
-                    productDetail(),
+                    productDetail(ProductViewmodel()),
                     SizedBox(height: 20),
                     ownerProfile(),
                     SizedBox(height: 5),
@@ -36,7 +37,7 @@ class ProductView extends StatelessWidget {
                       'Gallery',
                       style: TextStyle(
                         color: _primarycolor,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -47,7 +48,7 @@ class ProductView extends StatelessWidget {
                       'Price',
                       style: TextStyle(
                         color: _primarycolor,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -63,7 +64,7 @@ class ProductView extends StatelessWidget {
   }
 }
 
-Widget topHeadingRow() {
+Widget topHeadingRow(ProductViewmodel model) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.start,
@@ -89,7 +90,9 @@ Widget topHeadingRow() {
             width: 50,
             height: 50,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                model.naviagateToBack();
+              },
               icon: Center(
                 child: Icon(
                   Icons.arrow_back_ios_new,
@@ -111,7 +114,7 @@ Widget topHeadingRow() {
   );
 }
 
-Widget productDetail() {
+Widget productDetail(ProductViewmodel model) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -120,7 +123,11 @@ Widget productDetail() {
         child: SizedBox(
           height: 300,
           width: double.infinity,
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+          child: Image.asset(
+            'assets/images/house2.jpg',
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+          ),
         ),
       ),
       SizedBox(height: 10),
@@ -133,7 +140,7 @@ Widget productDetail() {
               Text(
                 'CRAFTSMAN HOUSE',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   color: _primarycolor,
                   fontWeight: FontWeight.w700,
                 ),
@@ -141,7 +148,7 @@ Widget productDetail() {
               Text(
                 '520 N Beaudry Ave, Los Angeles',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 10,
                   color: _primarycolor,
                   fontWeight: FontWeight.w500,
                 ),
@@ -150,14 +157,16 @@ Widget productDetail() {
           ),
 
           SizedBox(
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                model.navigateToWishlistView();
+              },
               icon: Icon(
                 Icons.bookmark_outline,
                 color: _primarycolor,
-                size: 30,
+                size: 22,
               ),
               style: IconButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -178,7 +187,7 @@ Widget productDetail() {
           SizedBox(width: 5),
           Text(
             '4 Beds',
-            style: TextStyle(height: 1, fontSize: 12, color: _primarycolor),
+            style: TextStyle(height: 1, fontSize: 10, color: _primarycolor),
           ),
           SizedBox(width: 20),
 
@@ -186,14 +195,14 @@ Widget productDetail() {
           SizedBox(width: 5),
           Text(
             '4 Baths',
-            style: TextStyle(height: 1, fontSize: 12, color: _primarycolor),
+            style: TextStyle(height: 1, fontSize: 10, color: _primarycolor),
           ),
           SizedBox(width: 20),
           Icon(Icons.directions_car, color: _iconColor),
           SizedBox(width: 5),
           Text(
             '1 Garage',
-            style: TextStyle(height: 1, fontSize: 12, color: _primarycolor),
+            style: TextStyle(height: 1, fontSize: 10, color: _primarycolor),
           ),
         ],
       ),
@@ -205,9 +214,18 @@ Widget ownerProfile() {
   return Row(
     children: [
       CircleAvatar(
+        backgroundColor: Colors.transparent,
         radius: 25,
         child: ClipOval(
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.fill),
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: Image.asset(
+              'assets/images/ownerprofile.jpg',
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
+            ),
+          ),
         ),
       ),
       SizedBox(width: 10),
@@ -217,14 +235,14 @@ Widget ownerProfile() {
           Text(
             'Rebecca Tetha',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: _primarycolor,
             ),
           ),
           Text(
             'Owner Craftsman House',
-            style: TextStyle(fontSize: 12, color: _primarycolor),
+            style: TextStyle(fontSize: 10, color: _primarycolor),
           ),
         ],
       ),
@@ -239,12 +257,12 @@ Widget ownerProfile() {
 
         onPressed: () {},
         label: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.symmetric(vertical: 6),
           child: Text(
             'Call',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -267,12 +285,12 @@ Widget readMoreText() {
     textAlign: TextAlign.left,
 
     moreStyle: TextStyle(
-      fontSize: 12,
+      fontSize: 10,
       height: 0.8,
       fontWeight: FontWeight.bold,
     ),
     lessStyle: TextStyle(
-      fontSize: 12,
+      fontSize: 10,
       height: 0.8,
       fontWeight: FontWeight.bold,
     ),
@@ -283,40 +301,40 @@ Widget galleryPictures() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Container(
+      SizedBox(
         height: 65,
         width: 70,
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+          child: Image.asset('assets/images/gallery1.jpg', fit: BoxFit.cover),
         ),
       ),
-      Container(
+      SizedBox(
         height: 65,
         width: 70,
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+          child: Image.asset('assets/images/gallery2.jpg', fit: BoxFit.cover),
         ),
       ),
-      Container(
+      SizedBox(
         height: 65,
         width: 70,
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+          child: Image.asset('assets/images/gallery3.jpg', fit: BoxFit.cover),
         ),
       ),
-      Container(
+      SizedBox(
         height: 65,
         width: 70,
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+          child: Image.asset('assets/images/gallery4.jpg', fit: BoxFit.cover),
         ),
       ),
     ],
@@ -330,7 +348,7 @@ Widget priceRow() {
       Text(
         r"$5990000",
         style: TextStyle(
-          fontSize: 26,
+          fontSize: 22,
           fontWeight: FontWeight.bold,
           color: _primarycolor,
         ),
@@ -348,7 +366,7 @@ Widget priceRow() {
           child: Text(
             'BUY NOW',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

@@ -22,11 +22,11 @@ class WishlistView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    topHeadingRow(),
+                    topHeadingRow(WishlistViewmodel()),
                     SizedBox(height: 15),
-                    product(),
+                    product('assets/images/house1.jpg', 'CRAFTSMAN HOUSE'),
                     SizedBox(height: 15),
-                    product(),
+                    product('assets/images/house2.jpg', 'CRAFTSMAN HOUSE 1'),
                   ],
                 ),
               ),
@@ -38,7 +38,7 @@ class WishlistView extends StatelessWidget {
   }
 }
 
-Widget topHeadingRow() {
+Widget topHeadingRow(WishlistViewmodel model) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +64,9 @@ Widget topHeadingRow() {
             width: 50,
             height: 50,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                model.navigateToBack();
+              },
               icon: Center(
                 child: Icon(
                   Icons.arrow_back_ios_new,
@@ -86,7 +88,7 @@ Widget topHeadingRow() {
   );
 }
 
-Widget product() {
+Widget product(String imagepath, String title) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(15),
     child: SizedBox(
@@ -95,7 +97,7 @@ Widget product() {
       child: Stack(
         children: [
           Image.asset(
-            'assets/images/image1.jpg',
+            imagepath,
             width: double.infinity,
             height: 215,
             fit: BoxFit.cover,
@@ -125,14 +127,18 @@ Widget product() {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'CRAFTSMAN HOUSE',
-                          style: TextStyle(fontSize: 18, color: Colors.white),
+                          title,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           '520 N Btoudry Ave Los Angeles',
                           style: TextStyle(
                             height: 1,
-                            fontSize: 13,
+                            fontSize: 10,
                             color: Color.fromARGB(108, 255, 255, 255),
                           ),
                         ),
@@ -140,7 +146,7 @@ Widget product() {
                     ),
 
                     Padding(
-                      padding: EdgeInsets.only(left: 65),
+                      padding: EdgeInsets.only(left: 30),
                       child: SizedBox(
                         width: 29,
                         height: 29,
@@ -176,7 +182,7 @@ Widget product() {
                       '4 Beds',
                       style: TextStyle(
                         height: 1,
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color.fromARGB(108, 255, 255, 255),
                       ),
                     ),
@@ -188,7 +194,7 @@ Widget product() {
                       '4 Baths',
                       style: TextStyle(
                         height: 1,
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color.fromARGB(108, 255, 255, 255),
                       ),
                     ),
@@ -199,7 +205,7 @@ Widget product() {
                       '1 Garage',
                       style: TextStyle(
                         height: 1,
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color.fromARGB(108, 255, 255, 255),
                       ),
                     ),

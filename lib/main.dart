@@ -1,10 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment_5/app/app.locator.dart';
 import 'package:flutter_assignment_5/app/app.router.dart';
+import 'package:flutter_assignment_5/firebase_options.dart';
 
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await setupLocator();
   runApp(MyApp());
 }

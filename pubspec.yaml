@@ -37,6 +37,8 @@ dependencies:
   stacked: ^3.4.4
   stacked_services: ^1.6.0
   readmore: ^3.0.0
+  firebase_core: ^4.0.0
+  firebase_auth: ^6.0.1
 
 dev_dependencies:
   flutter_test:

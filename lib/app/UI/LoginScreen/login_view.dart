@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_assignment_5/app/UI/LoginScreen/login_view.dart';
+import 'package:flutter_assignment_5/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment_5/app/UI/LoginScreen/login_viewmodel.dart'
     as model;
@@ -8,6 +12,9 @@ import 'package:stacked/stacked.dart';
 // Color _primarycolor = Color(0xff0F2F44);
 Color _primarycolor = Color(0xff0F2F44);
 Color _bluecolor = Color(0xff2D7FF9);
+
+TextEditingController _emailController = TextEditingController();
+TextEditingController _passwordController = TextEditingController();
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -42,11 +49,13 @@ class LoginView extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 _CurptinoTextField(
+                  cntroller: _emailController,
                   placeholder: 'Enter email',
                   prefixicon: Icons.email,
                 ),
                 SizedBox(height: 10),
                 _CurptinoTextField(
+                  cntroller: _passwordController,
                   placeholder: 'Enter password',
                   prefixicon: Icons.lock,
                   suffixicon: Icons.remove_red_eye,
@@ -62,7 +71,25 @@ class LoginView extends StatelessWidget {
                     minimumSize: Size(double.infinity, 55),
                     elevation: 6,
                   ),
-                  onPressed: () {},
+
+                  onPressed: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                          );
+
+                      model.navigateToMainView();
+                    } on FirebaseAuthException catch (e) {
+                      var snackBar = SnackBar(content: Text("${e.code}"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    } catch (e, s) {
+                      var snackBar = SnackBar(
+                        content: Text("Unknown error: $e"),
+                      );
+                    }
+                  },
                   child: Text(
                     'Sign in',
                     style: TextStyle(
@@ -146,10 +173,12 @@ class LoginView extends StatelessWidget {
 Widget _CurptinoTextField({
   required String placeholder,
   required IconData prefixicon,
+  required TextEditingController cntroller,
   IconData? suffixicon,
 }) {
   return CupertinoTextField(
     padding: EdgeInsets.all(17),
+    controller: cntroller,
 
     placeholder: placeholder,
     placeholderStyle: TextStyle(

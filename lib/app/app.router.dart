@@ -19,13 +19,13 @@ import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i8;
 
 class Routes {
-  static const loginView = '/login-view';
+  static const loginView = '/';
 
   static const mainView = '/main-view';
 
   static const productView = '/product-view';
 
-  static const wishlistView = '/';
+  static const wishlistView = '/wishlist-view';
 
   static const all = <String>{loginView, mainView, productView, wishlistView};
 }
